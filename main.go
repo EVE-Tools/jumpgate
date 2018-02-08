@@ -21,10 +21,10 @@ import (
 type Config struct {
 	LogLevel        string `default:"info" envconfig:"log_level"`
 	ListenHost      string `default:":8000" split_words:"true"`
-	ESIMarketsHost  string `default:"esi-markets.element43.cluster.local:43000" envconfig:"esi_markets_host"`
-	MarketStatsHost string `default:"market-stats.element43.cluster.local:43000" envconfig:"market_stats_host"`
-	StaticDataHost  string `default:"static-data.element43.cluster.local:43000" envconfig:"static_data_host"`
-	TopStationsHost string `default:"top-stations.element43.cluster.local:43000" envconfig:"top_stations_host"`
+	ESIMarketsHost  string `default:"esi-markets.element43.svc.cluster.local:43000" envconfig:"esi_markets_host"`
+	MarketStatsHost string `default:"market-stats.element43.svc.cluster.local:43000" envconfig:"market_stats_host"`
+	StaticDataHost  string `default:"static-data.element43.svc.cluster.local:43000" envconfig:"static_data_host"`
+	TopStationsHost string `default:"top-stations.element43.svc.cluster.local:43000" envconfig:"top_stations_host"`
 }
 
 // Load configuration from environment

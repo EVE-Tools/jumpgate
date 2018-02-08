@@ -21,7 +21,7 @@ Environment Variable | Default | Description
 --- | --- | ---
 LOG_LEVEL | info | The service's log level
 LISTEN_HOST | :8000 | The host/port jumpgate will listen on
-ESI_MARKETS_HOST | esi-markets.element43.cluster.local:43000 | Location of the ESI markets service
-MARKET_STATS_HOST | market-stats.element43.cluster.local:43000 | Location of the market statistics service
-STATIC_DATA_HOST | static-data.element43.cluster.local:43000 | Location of the static data service
-TOP_STATIONS_HOST | top-stations.element43.cluster.local:43000 | Location of the top stations service
+ESI_MARKETS_HOST | esi-markets.element43.svc.cluster.local:43000 | Location of the ESI markets service
+MARKET_STATS_HOST | market-stats.element43.svc.cluster.local:43000 | Location of the market statistics service
+STATIC_DATA_HOST | static-data.element43.svc.cluster.local:43000 | Location of the static data service
+TOP_STATIONS_HOST | top-stations.element43.svc.cluster.local:43000 | Location of the top stations service
