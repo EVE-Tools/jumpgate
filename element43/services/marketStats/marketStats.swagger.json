@@ -1,0 +1,253 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "title": "marketStats.proto",
+    "version": "version not set"
+  },
+  "schemes": [
+    "http",
+    "https"
+  ],
+  "consumes": [
+    "application/json"
+  ],
+  "produces": [
+    "application/json"
+  ],
+  "paths": {
+    "/v1/market/stats/history/region/{region_id}": {
+      "get": {
+        "operationId": "GetRegionHistory",
+        "responses": {
+          "200": {
+            "description": "",
+            "schema": {
+              "$ref": "#/definitions/marketStatsGetHistoryStatsResponse"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "region_id",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "format": "uint64"
+          }
+        ],
+        "tags": [
+          "MarketStats"
+        ]
+      }
+    },
+    "/v1/market/stats/history/region/{region_id}/type/{type_id}": {
+      "get": {
+        "operationId": "GetRegionTypeHistory",
+        "responses": {
+          "200": {
+            "description": "",
+            "schema": {
+              "$ref": "#/definitions/marketStatsHistoryStats"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "region_id",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "format": "uint64"
+          },
+          {
+            "name": "type_id",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "format": "uint64"
+          }
+        ],
+        "tags": [
+          "MarketStats"
+        ]
+      }
+    },
+    "/v1/market/stats/history/type/{type_id}": {
+      "get": {
+        "operationId": "GetTypeHistory",
+        "responses": {
+          "200": {
+            "description": "",
+            "schema": {
+              "$ref": "#/definitions/marketStatsGetHistoryStatsResponse"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "type_id",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "format": "uint64"
+          }
+        ],
+        "tags": [
+          "MarketStats"
+        ]
+      }
+    }
+  },
+  "definitions": {
+    "marketStatsGetHistoryStatsResponse": {
+      "type": "object",
+      "properties": {
+        "history_stats": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/marketStatsHistoryStats"
+          },
+          "title": "The matching history stats"
+        }
+      }
+    },
+    "marketStatsHistoryDataPoint": {
+      "type": "object",
+      "properties": {
+        "date": {
+          "type": "string",
+          "format": "date-time",
+          "title": "Date of the datapoint"
+        },
+        "highest": {
+          "type": "number",
+          "format": "double",
+          "title": "Highest price the type was traded for that day"
+        },
+        "lowest": {
+          "type": "number",
+          "format": "double",
+          "title": "Lowest price the type was traded for that day"
+        },
+        "average": {
+          "type": "number",
+          "format": "double",
+          "title": "Average price the type was traded for that day"
+        },
+        "volume": {
+          "type": "string",
+          "format": "int64",
+          "title": "Total number of items of the type traded that day"
+        },
+        "order_count": {
+          "type": "string",
+          "format": "int64",
+          "title": "Total number orders for the type that day"
+        }
+      }
+    },
+    "marketStatsHistoryStats": {
+      "type": "object",
+      "properties": {
+        "region_id": {
+          "type": "string",
+          "format": "int64",
+          "title": "The result's region's ID"
+        },
+        "type_id": {
+          "type": "string",
+          "format": "int64",
+          "title": "The result's type's ID"
+        },
+        "generated_at": {
+          "type": "string",
+          "format": "date-time",
+          "title": "Date this dataset was fetched from the server (usually at midnight)"
+        },
+        "current_stats": {
+          "$ref": "#/definitions/marketStatsHistoryDataPoint",
+          "title": "Latest available datapoint (usually from yesterday)"
+        },
+        "previous_stats": {
+          "$ref": "#/definitions/marketStatsHistoryDataPoint",
+          "title": "Previous datapoint"
+        },
+        "week_price_weighted_average": {
+          "type": "number",
+          "format": "double",
+          "title": "Last week's *weighted* average of the average price - use this for calculations!"
+        },
+        "week_price_average": {
+          "type": "number",
+          "format": "double",
+          "title": "Last week's average average price (ignores volume)"
+        },
+        "week_price_average_standard_deviation": {
+          "type": "number",
+          "format": "double",
+          "title": "Last week's absolute standard deviation of the average price"
+        },
+        "week_price_average_relative_standard_deviation": {
+          "type": "number",
+          "format": "double",
+          "title": "Last week's absolute standard deviation of the average price, can be used for analyzing price's volatility"
+        },
+        "week_isk_volume_average": {
+          "type": "number",
+          "format": "double",
+          "title": "Last week's average daily ISK volume"
+        },
+        "week_isk_volume_average_standard_deviation": {
+          "type": "number",
+          "format": "double",
+          "title": "Last week's average daily ISK volume's standard deviation"
+        },
+        "week_isk_volume_average_relative_standard_deviation": {
+          "type": "number",
+          "format": "double",
+          "title": "Last week's relative daily ISK volume's standard deviation, can be used for analyzing general market's volatility"
+        },
+        "week_order_count_total": {
+          "type": "string",
+          "format": "int64",
+          "title": "Total number of orders for that type last week"
+        },
+        "week_order_count_average": {
+          "type": "number",
+          "format": "double",
+          "title": "Average daily order count last week"
+        },
+        "week_order_count_standard_deviation": {
+          "type": "number",
+          "format": "double",
+          "title": "Average daily order count's standard deviation last week"
+        },
+        "week_order_count_relative_standard_deviation": {
+          "type": "number",
+          "format": "double",
+          "title": "Average daily order count's relative standard deviation last week, again can be used for volatility"
+        },
+        "week_volume_total": {
+          "type": "string",
+          "format": "int64",
+          "title": "Total number of items of that type traded last week"
+        },
+        "week_volume_average": {
+          "type": "number",
+          "format": "double",
+          "title": "Average daily items traded of that type last week"
+        },
+        "week_volume_standard_deviation": {
+          "type": "number",
+          "format": "double",
+          "title": "Standard deviation of that value"
+        },
+        "week_volume_relative_standard_deviation": {
+          "type": "number",
+          "format": "double",
+          "title": "Relative standard deviation, interesting for checking if there are non-continuous patterns (volatility)"
+        }
+      }
+    }
+  }
+}

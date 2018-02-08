@@ -1,0 +1,252 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "title": "esiMarkets.proto",
+    "version": "version not set"
+  },
+  "schemes": [
+    "http",
+    "https"
+  ],
+  "consumes": [
+    "application/json"
+  ],
+  "produces": [
+    "application/json"
+  ],
+  "paths": {
+    "/v1/market/orders/order/{order_id}": {
+      "get": {
+        "operationId": "GetOrder",
+        "responses": {
+          "200": {
+            "description": "",
+            "schema": {
+              "$ref": "#/definitions/esiMarketsGetOrdersResponse"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "order_id",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "format": "uint64"
+          }
+        ],
+        "tags": [
+          "ESIMarkets"
+        ]
+      }
+    },
+    "/v1/market/orders/region/{region_id}": {
+      "get": {
+        "operationId": "GetRegion",
+        "responses": {
+          "200": {
+            "description": "",
+            "schema": {
+              "$ref": "#/definitions/esiMarketsGetOrdersResponse"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "region_id",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "format": "uint64"
+          }
+        ],
+        "tags": [
+          "ESIMarkets"
+        ]
+      }
+    },
+    "/v1/market/orders/region/{region_id}/type/{type_id}": {
+      "get": {
+        "operationId": "GetRegionType",
+        "responses": {
+          "200": {
+            "description": "",
+            "schema": {
+              "$ref": "#/definitions/esiMarketsGetOrdersResponse"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "region_id",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "format": "uint64"
+          },
+          {
+            "name": "type_id",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "format": "uint64"
+          }
+        ],
+        "tags": [
+          "ESIMarkets"
+        ]
+      }
+    },
+    "/v1/market/orders/type/{type_id}": {
+      "get": {
+        "operationId": "GetType",
+        "responses": {
+          "200": {
+            "description": "",
+            "schema": {
+              "$ref": "#/definitions/esiMarketsGetOrdersResponse"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "type_id",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "format": "uint64"
+          }
+        ],
+        "tags": [
+          "ESIMarkets"
+        ]
+      }
+    },
+    "/v1/market/orders/updates": {
+      "get": {
+        "operationId": "GetRegionTypeUpdateStream",
+        "responses": {
+          "200": {
+            "description": "(streaming responses)",
+            "schema": {
+              "$ref": "#/definitions/esiMarketsGetRegionTypeUpdateStreamResponse"
+            }
+          }
+        },
+        "tags": [
+          "ESIMarkets"
+        ]
+      }
+    }
+  },
+  "definitions": {
+    "esiMarketsGetOrdersResponse": {
+      "type": "object",
+      "properties": {
+        "orders": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/esiMarketsOrder"
+          },
+          "title": "Matching orders"
+        }
+      }
+    },
+    "esiMarketsGetRegionTypeUpdateStreamResponse": {
+      "type": "object",
+      "properties": {
+        "region_types": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/esiMarketsRegionType"
+          },
+          "title": "Region/tye pairs affected by update"
+        }
+      }
+    },
+    "esiMarketsOrder": {
+      "type": "object",
+      "properties": {
+        "order_id": {
+          "type": "string",
+          "format": "uint64",
+          "title": "The order's ID"
+        },
+        "type_id": {
+          "type": "string",
+          "format": "uint64",
+          "title": "The order's type's ID"
+        },
+        "region_id": {
+          "type": "string",
+          "format": "uint64",
+          "title": "The order's region's ID"
+        },
+        "location_id": {
+          "type": "string",
+          "format": "uint64",
+          "title": "ID of the order's location/station"
+        },
+        "volume_total": {
+          "type": "string",
+          "format": "uint64",
+          "title": "Initital number of items of the order"
+        },
+        "volume_remain": {
+          "type": "string",
+          "format": "uint64",
+          "title": "Number of items remaining"
+        },
+        "min_volume": {
+          "type": "string",
+          "format": "uint64",
+          "title": "Minimum volume to be traded for this order"
+        },
+        "price": {
+          "type": "number",
+          "format": "double",
+          "title": "The price the type is bought/sold for"
+        },
+        "is_buy_order": {
+          "type": "boolean",
+          "format": "boolean",
+          "title": "True: Bid/buy order | False: ask/sell order"
+        },
+        "duration": {
+          "type": "integer",
+          "format": "int32",
+          "title": "Defines how long the order exists after creation"
+        },
+        "range": {
+          "type": "string",
+          "title": "Order's range"
+        },
+        "issued": {
+          "type": "string",
+          "format": "date-time",
+          "title": "Date the order was issued"
+        },
+        "seen_at": {
+          "type": "string",
+          "format": "date-time",
+          "title": "When the order was last seen in this state: when using market-streamer the last-modified date from EMDRToNSQService"
+        }
+      }
+    },
+    "esiMarketsRegionType": {
+      "type": "object",
+      "properties": {
+        "region_id": {
+          "type": "string",
+          "format": "uint64",
+          "title": "The update's region's ID"
+        },
+        "type_id": {
+          "type": "string",
+          "format": "uint64",
+          "title": "The update's type's ID"
+        }
+      }
+    }
+  }
+}

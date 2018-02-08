@@ -1,0 +1,79 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "title": "topStations.proto",
+    "version": "version not set"
+  },
+  "schemes": [
+    "http",
+    "https"
+  ],
+  "consumes": [
+    "application/json"
+  ],
+  "produces": [
+    "application/json"
+  ],
+  "paths": {
+    "/v1/market/stats/stations/top": {
+      "get": {
+        "operationId": "GetTopStations",
+        "responses": {
+          "200": {
+            "description": "",
+            "schema": {
+              "$ref": "#/definitions/topStationsGetTopStationsResponse"
+            }
+          }
+        },
+        "tags": [
+          "TopStations"
+        ]
+      }
+    }
+  },
+  "definitions": {
+    "topStationsGetTopStationsResponse": {
+      "type": "object",
+      "properties": {
+        "stations": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/topStationsStationStats"
+          },
+          "title": "Station list"
+        }
+      }
+    },
+    "topStationsStationStats": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "string",
+          "format": "int64",
+          "title": "The station's ID"
+        },
+        "ask_volume": {
+          "type": "number",
+          "format": "double",
+          "title": "The station's ask orders total volume"
+        },
+        "bid_volume": {
+          "type": "number",
+          "format": "double",
+          "title": "The station's bid orders total volume"
+        },
+        "total_volume": {
+          "type": "number",
+          "format": "double",
+          "title": "The station's orders total volume"
+        },
+        "total_orders": {
+          "type": "number",
+          "format": "double",
+          "title": "The station's total number of orders"
+        }
+      }
+    }
+  }
+}

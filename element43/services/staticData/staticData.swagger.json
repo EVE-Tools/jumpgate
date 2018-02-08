@@ -1,0 +1,202 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "title": "staticData.proto",
+    "version": "version not set"
+  },
+  "schemes": [
+    "http",
+    "https"
+  ],
+  "consumes": [
+    "application/json"
+  ],
+  "produces": [
+    "application/json"
+  ],
+  "paths": {
+    "/v1/universe/locations": {
+      "post": {
+        "operationId": "GetLocations",
+        "responses": {
+          "200": {
+            "description": "",
+            "schema": {
+              "$ref": "#/definitions/staticDataGetLocationsResponse"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/staticDataGetLocationsRequest"
+            }
+          }
+        ],
+        "tags": [
+          "StaticData"
+        ]
+      }
+    }
+  },
+  "definitions": {
+    "staticDataConstellation": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "string",
+          "format": "int64",
+          "title": "The constellation's id"
+        },
+        "name": {
+          "type": "string",
+          "title": "The constellation's name"
+        }
+      }
+    },
+    "staticDataCoordinates": {
+      "type": "object",
+      "properties": {
+        "x": {
+          "type": "number",
+          "format": "double",
+          "title": "X-Coordinate"
+        },
+        "y": {
+          "type": "number",
+          "format": "double",
+          "title": "Y-Coordinate"
+        },
+        "z": {
+          "type": "number",
+          "format": "double",
+          "title": "Z-Coordinate"
+        }
+      }
+    },
+    "staticDataGetLocationsRequest": {
+      "type": "object",
+      "properties": {
+        "location_ids": {
+          "type": "array",
+          "items": {
+            "type": "string",
+            "format": "int64"
+          },
+          "title": "Get data for these location IDs"
+        }
+      }
+    },
+    "staticDataGetLocationsResponse": {
+      "type": "object",
+      "properties": {
+        "locations": {
+          "type": "object",
+          "additionalProperties": {
+            "$ref": "#/definitions/staticDataLocation"
+          },
+          "title": "Locations retrieved"
+        }
+      }
+    },
+    "staticDataLocation": {
+      "type": "object",
+      "properties": {
+        "region": {
+          "$ref": "#/definitions/staticDataRegion",
+          "title": "Information about a region"
+        },
+        "constellation": {
+          "$ref": "#/definitions/staticDataConstellation",
+          "title": "Information about a constellation"
+        },
+        "solar_system": {
+          "$ref": "#/definitions/staticDataSolarSystem",
+          "title": "Information about a solar system"
+        },
+        "station": {
+          "$ref": "#/definitions/staticDataStation",
+          "title": "Information about a station"
+        }
+      }
+    },
+    "staticDataRegion": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "string",
+          "format": "int64",
+          "title": "The region's id"
+        },
+        "name": {
+          "type": "string",
+          "title": "The region's name"
+        }
+      }
+    },
+    "staticDataSolarSystem": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "string",
+          "format": "int64",
+          "title": "The system's ID"
+        },
+        "security_status": {
+          "type": "number",
+          "format": "double",
+          "title": "The system's true security status"
+        },
+        "name": {
+          "type": "string",
+          "title": "The system's name"
+        }
+      }
+    },
+    "staticDataStation": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "string",
+          "format": "int64",
+          "title": "The station's ID"
+        },
+        "name": {
+          "type": "string",
+          "title": "The station's name"
+        },
+        "type_id": {
+          "type": "string",
+          "format": "int64",
+          "title": "The station's typeID (only for structures)"
+        },
+        "type_name": {
+          "type": "string",
+          "title": "The station type's name (only for structures)"
+        },
+        "last_seen": {
+          "type": "string",
+          "format": "date-time",
+          "title": "When the station was last seen (only for structures)"
+        },
+        "public": {
+          "type": "boolean",
+          "format": "boolean",
+          "title": "Whether this station is public (only for structures)"
+        },
+        "first_seen": {
+          "type": "string",
+          "format": "date-time",
+          "title": "When the station was first seen (only for structures)"
+        },
+        "coordinates": {
+          "$ref": "#/definitions/staticDataCoordinates",
+          "title": "The station's coordinates (only for structures)"
+        }
+      }
+    }
+  }
+}
