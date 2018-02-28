@@ -40,6 +40,22 @@
           "StaticData"
         ]
       }
+    },
+    "/v1/universe/types/market": {
+      "get": {
+        "operationId": "GetMarketTypes",
+        "responses": {
+          "200": {
+            "description": "",
+            "schema": {
+              "$ref": "#/definitions/staticDataGetMarketTypesResponse"
+            }
+          }
+        },
+        "tags": [
+          "StaticData"
+        ]
+      }
     }
   },
   "definitions": {
@@ -97,6 +113,19 @@
           "type": "object",
           "additionalProperties": {
             "$ref": "#/definitions/staticDataLocation"
+          },
+          "title": "Locations retrieved"
+        }
+      }
+    },
+    "staticDataGetMarketTypesResponse": {
+      "type": "object",
+      "properties": {
+        "type_ids": {
+          "type": "array",
+          "items": {
+            "type": "integer",
+            "format": "int32"
           },
           "title": "Locations retrieved"
         }
